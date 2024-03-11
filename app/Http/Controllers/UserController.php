@@ -83,15 +83,61 @@ class UserController extends Controller
         //     ],
         // );
 
-        $user = UserModel::firstOrNew(
+        // $user = UserModel::firstOrNew(
+        //     [
+        //         'username' => 'manager33',
+        //         'nama' => 'Manager Tiga Tiga',
+        //         'password' => Hash::make('12345'),
+        //         'level_id' => 2,
+        //     ],
+        // );
+        // $user->save();
+
+        // $user = UserModel::create(
+        //     [
+        //         'username' => 'manager55',
+        //         'nama' => 'Manager55',
+        //         'password' => Hash::make('12345'),
+        //         'level_id' => 2
+        //     ],
+        // );
+        
+        // $user->username = 'manager56';
+
+        // $user->isDirty(); // true
+        // $user->isDirty('username'); // true
+        // $user->isDirty('nama'); // false
+        // $user->isDirty(['nama', 'username']); // true
+
+        // $user->isClean(); // false
+        // $user->isClean('username'); // false
+        // $user->isClean('nama'); // true
+        // $user->isClean(['nama', 'username']); // false
+        
+        // $user->save();
+
+        // $user->isDirty();
+        // $user->isClean();
+        // dd($user->isDirty());
+
+        $user = UserModel::create(
             [
-                'username' => 'manager33',
-                'nama' => 'Manager Tiga Tiga',
+                'username' => 'manager11',
+                'nama' => 'Manager11',
                 'password' => Hash::make('12345'),
-                'level_id' => 2,
+                'level_id' => 2
             ],
         );
+        
+        $user->username = 'manager12';
+
         $user->save();
-        return view('user', ['data' => $user]);
+
+        $user->wasChanged();
+        $user->wasChanged('username');
+        $user->wasChanged(['username', 'level_id']);
+        $user->wasChanged('nama');
+        dd($user->wasChanged(['nama', 'username']));
+        // return view('user', ['data' => $user]);
     }
 }

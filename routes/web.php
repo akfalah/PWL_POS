@@ -24,6 +24,16 @@ Route::get('/level', [LevelController::class, 'index']);
 
 Route::get('/kategori', [KategoriController::class, 'index']);
 
+Route::get('/kategori/create', [KategoriController::class, 'create']);
+
+Route::post('/kategori', [KategoriController::class, 'store']);
+
+Route::get('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('/kategori/delete');
+
+Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('/kategori/edit');
+
+Route::put('/kategori/update/{id}', [KategoriController::class, 'update'])->name('/kategori/update');
+
 Route::get('/user', [UserController::class, 'index'])->name('/user');
 
 Route::get('/user/tambah', [UserController::class, 'tambah'])->name('/user/tambah');
@@ -35,3 +45,7 @@ Route::get('/user/hapus/{id}', [UserController::class, 'hapus'])->name('/user/ha
 Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan'])->name('/user/tambah_simpan');
 
 Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan'])->name('/user/ubah_simpan');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -326,6 +326,10 @@ return [
             'text' => 'Kategori',
             'url' => 'kategori',
         ],
+        [
+            'text' => 'User',
+            'url' => 'user',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

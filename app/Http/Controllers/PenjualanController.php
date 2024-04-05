@@ -36,11 +36,6 @@ class PenjualanController extends Controller
             ->addIndexColumn() // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
             ->addColumn('aksi', function ($penjualan) { // menambahkan kolom aksi
                 $btn = '<a href="' . url('/penjualan/' . $penjualan->penjualan_id) . '" class="btn btn-info btn-sm">Detail</a> ';
-                $btn .= '<form class="d-inline-block" method="POST" action="' . url('/penjualan/'.$penjualan->penjualan_id).'">' 
-                    . csrf_field() . method_field('DELETE') .
-                    '<button type="submit" class="btn btn-danger btn-sm"
-                    onclick="return confirm(\'Apakah Anda yakit menghapus data
-                    ini?\');">Hapus</button></form>';
                 return $btn;
             })
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
@@ -67,9 +62,14 @@ class PenjualanController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        $penjualan = PenjualanModel::with(['user', 'detail.barang'])->find($id);
+    {        
+        $penjualan = PenjualanModel::with('user')->find($id);
 
+        $detail = PenjualanDetailModel::with('penjualan', 'barang')
+        ->whereHas('penjualan', function ($query) use ($id) {
+            $query->where('penjualan_id', '=', $id);
+        })
+        ->get();
         $breadcrumb = (object) [
             'title' => 'Detail penjualan',
             'list'  => ['Home', 'penjualan', 'Detail']
@@ -81,7 +81,7 @@ class PenjualanController extends Controller
 
         $activeMenu = 'penjualan';
 
-        return view('penjualan.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu, 'penjualan' => $penjualan]);
+        return view('penjualan.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu, 'penjualan' => $penjualan, 'detail' => $detail]);
     }
 
     /**

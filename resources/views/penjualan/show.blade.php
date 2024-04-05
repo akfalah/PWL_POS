@@ -20,25 +20,42 @@
                         <td>{{ $penjualan->penjualan_id }}</td>
                     </tr>
                     <tr>
-                        <th>ID Penjualan</th>
-                        <td>{{ $penjualan->detail_id }}</td>
+                        <th>User</th>
+                        <td>{{ $penjualan->user->nama }}</td>
                     </tr>
                     <tr>
-                        <th>Barang</th>
-                        @foreach ($penjualan->detail as $detail)
-                            <tr>
-                                <td>{{ $detail->barang->barang_nama }}</td>
-                            </tr>
-                        @endforeach
+                        <th>Pembeli</th>
+                        <td>{{ $penjualan->pembeli }}</td>
                     </tr>
                     <tr>
+                        <th>Kode Penjualan</th>
+                        <td>{{ $penjualan->penjualan_kode }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal</th>
+                        <td>{{ $penjualan->penjualan_tanggal }}</td>
+                    </tr>
+                </table>
+
+                <table class="table table-bordered table-striped table-hover table-sm">
+                    <thead>
+                    <tr>
+                        <th>Nama Barang</th>
                         <th>Harga</th>
-                        <td>{{ $penjualan->harga }}</td>
-                    </tr>
-                    <tr>
                         <th>Jumlah</th>
-                        <td>{{ $penjualan->jumlah }}</td>
                     </tr>
+                    </thead>
+                    <tbody>
+                    @forelse ($detail as $d)
+                        <tr>
+                            <td>{{ $d->barang->barang_nama }}</td> <td>{{ $d->harga }}</td> <td>{{ $d->jumlah }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3">Tidak ada detail barang</td>
+                        </tr>
+                    @endforelse
+                    </tbody>
                 </table>
             @endempty
 

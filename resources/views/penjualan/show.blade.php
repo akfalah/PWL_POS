@@ -36,7 +36,7 @@
                         <td>{{ $penjualan->penjualan_tanggal }}</td>
                     </tr>
                 </table>
-
+                
                 <table class="table table-bordered table-striped table-hover table-sm">
                     <thead>
                     <tr>
@@ -48,7 +48,9 @@
                     <tbody>
                     @forelse ($detail as $d)
                         <tr>
-                            <td>{{ $d->barang->barang_nama }}</td> <td>{{ $d->harga }}</td> <td>{{ $d->jumlah }}</td>
+                            <td>{{ $d->barang->barang_nama }}</td>
+                            <td>{{ $d->harga }}</td>
+                            <td>{{ $d->jumlah }}</td>
                         </tr>
                     @empty
                         <tr>

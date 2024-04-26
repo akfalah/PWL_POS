@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\BarangController;
+use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\LevelController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +30,21 @@ Route::post('levels', [LevelController::class, 'store']);
 Route::get('levels/{level}', [LevelController::class, 'show']);
 Route::put('levels/{level}', [LevelController::class, 'update']);
 Route::delete('levels/{level}', [LevelController::class, 'destroy']);
+
+Route::get('users', [UserController::class, 'index']);
+Route::post('users', [UserController::class, 'store']);
+Route::put('users/{user}', [UserController::class, 'update']);
+Route::get('users/{user}', [UserController::class, 'show']);
+Route::delete('users/{user}', [UserController::class, 'destroy']);
+
+Route::get('categories', [KategoriController::class, 'index']);
+Route::post('categories', [KategoriController::class, 'store']);
+Route::put('categories/{kategori}', [KategoriController::class, 'update']);
+Route::get('categories/{kategori}', [KategoriController::class, 'show']);
+Route::delete('categories/{kategori}', [KategoriController::class, 'destroy']);
+
+Route::get('products', [BarangController::class, 'index']);
+Route::post('products', [BarangController::class, 'store']);
+Route::put('products/{barang}', [BarangController::class, 'update']);
+Route::get('products/{barang}', [BarangController::class, 'show']);
+Route::delete('products/{barang}', [BarangController::class, 'destroy']);

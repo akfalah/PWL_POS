@@ -78,14 +78,24 @@ class UserController extends Controller
             'username'  => 'required|string|min:3|unique:m_user,username',
             'nama'      => 'required|string|max:100',
             'password'  => 'required|min:5',
-            'level_id'  => 'required|integer'
+            'level_id'  => 'required|integer',
+            'image'     => 'required|file|image|max:5000'
         ]);
+
+        $extFile = $request->image->extension();
+        $nameFile = $request->username . '.' . $extFile;
+        
+        $path = $request->image->move('gambar', $nameFile);
+        $path = str_replace("\\", "//", $path);
+
+        $newPath = asset('gambar/' . $nameFile);
 
         UserModel::create([
             'username'  => $request->username,
             'nama'      => $request->nama,
             'password'  => bcrypt($request->password),
-            'level_id'  => $request->level_id
+            'level_id'  => $request->level_id,
+            'image'     => $newPath
         ]);
 
         return redirect('/user')->with('success', 'Data user berhasil disimpan');

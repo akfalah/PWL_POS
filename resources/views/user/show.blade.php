@@ -32,6 +32,10 @@
                         <td>{{ $user->nama }}</td>
                     </tr>
                     <tr>
+                        <th>Foto Profil</th>
+                        <td><img src="{{ $user->image }}"></td>
+                    </tr>
+                    <tr>
                         <th>Password</th>
                         <td>********</td>
                     </tr>
